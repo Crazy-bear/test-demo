@@ -52,15 +52,15 @@ def md5_encryption(string_):
 
 
 
-def login(mobilePhone, loginPsw):
+def login(mobile_phone, login_psw):
     '''
 
     :param mobilePhone: string  user's mobile phone
     :param loginPsw:    string  user's password
     :return:            string  user's token
     '''
-    loginPsw = md5_encryption(loginPsw)
-    login_pars = {'mobilePhone': mobilePhone, 'loginPsw': loginPsw}
+    login_psw = md5_encryption(login_psw)
+    login_pars = {'mobilePhone': mobile_phone, 'loginPsw': login_psw}
     r = requests.post(login_url, login_pars)
     status_code = r.status_code
     ret = r.json()['ret']
@@ -81,4 +81,4 @@ def login(mobilePhone, loginPsw):
 # 运用main（）方法运行用例
 if __name__ == '__main__':
     login('13286993500', '123456')
-    # print(md_encryption('123456'))
+    print(md5_encryption('123456'))

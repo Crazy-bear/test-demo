@@ -58,6 +58,7 @@ class LoginCase(unittest.TestCase):
         self.assertEqual('成功', msg)
         self.assertTrue(int(id) > 0)
 
+    @pytest.mark.bvt
     def test_city_member_login_success(self):
         '''冒烟测试：城市运营商登陆成功'''
         mobilePhone = 18664818789
