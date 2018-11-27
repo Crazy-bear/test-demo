@@ -45,8 +45,8 @@ def md5_encryption(string_):
     if isinstance(string_, str):
         m = md5()
         m.update(b'%s' % (string_.encode('utf8')))
-        encodeStr = m.hexdigest()
-        return encodeStr
+        encode_str = m.hexdigest()
+        return encode_str
     else:
         raise TypeError('必须传入字符串类型')
 
@@ -80,5 +80,5 @@ def login(mobile_phone, login_psw):
 
 # 运用main（）方法运行用例
 if __name__ == '__main__':
-    login('13286993500', '123456')
+    login('18000000001', '123456')
     print(md5_encryption('123456'))

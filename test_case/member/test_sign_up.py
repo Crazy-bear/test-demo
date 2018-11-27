@@ -1,14 +1,12 @@
 # encoding:utf8
-import os, sys
-import unittest, requests
-from pprint import pprint
-from time import sleep
+import os
+import sys
+import unittest
 
 api_auto_test_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, api_auto_test_path)
 from common.mysql_database import MySqlDatabase
 from common.api_url import *
-from common.all_sql import *
 
 
 class LoginCase(unittest.TestCase):
@@ -19,21 +17,21 @@ class LoginCase(unittest.TestCase):
     def tearDown(self):
         self.db.connect.close()
 
-    def delect_member(self, mobilePhone):
-        sql = 'DELETE from member where mobile_phone=%s' % (mobilePhone)
-        return self.db.delete(sql)
+    def delect_member(self, db, mobile_phone):
+        sql = 'DELETE from member where mobile_phone=%s' % (mobile_phone)
+        return db.delete(sql)
 
-    def query_msg_code(self, mobilePhone):
-        sql = 'select * from verify_code where mobile=%s order BY id DESC' % (mobilePhone)
-        return self.db.query_rows(sql)
+    def query_msg_code(self, db, mobile_phone):
+        sql = 'select * from verify_code where mobile=%s order BY id DESC' % (mobile_phone)
+        return db.query_rows(sql)
 
-    def send_msg_code(self, mobilePhone):
-        code_pars = {'mobilePhone': mobilePhone}
+    def send_msg_code(self, mobile_phone):
+        code_pars = {'mobilePhone': mobile_phone}
         r = requests.post(code_url, code_pars)
         self.assertEqual(200, r.status_code)
 
-    def sign_up(self, mobilePhone, loginPwd, code):
-        sign_up_pars = {'mobilePhone': mobilePhone,
+    def sign_up(self, mobile_phone, loginPwd, code):
+        sign_up_pars = {'mobilePhone': mobile_phone,
                         'loginPwd': loginPwd,
                         'code': code}
         r = requests.post(sign_up_url, sign_up_pars)
@@ -46,7 +44,7 @@ class LoginCase(unittest.TestCase):
         login_passwd_md5 = md5_encryption(login_passwd)
         try:
             self.send_msg_code(mobile_phone)
-            code = get_msg_code_sql(self.db, mobile_phone)[0]['code']
+            code = self.query_msg_code(self.db, mobile_phone)[0]['code']
             r = self.sign_up(mobile_phone, login_passwd_md5, code)
             # print('sign',r.json())
             self.assertEqual(200, r.status_code)
@@ -57,9 +55,7 @@ class LoginCase(unittest.TestCase):
         except AssertionError:
             raise AssertionError
         finally:
-            self.delect_member(mobile_phone)
-            # pass
-
+            self.delect_member(self.db, mobile_phone)
 
 if __name__ == '__main__':
     unittest.main()
