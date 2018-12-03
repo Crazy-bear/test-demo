@@ -1,7 +1,6 @@
 # encoding:utf8
 import os
 import sys
-import unittest
 
 api_auto_test_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, api_auto_test_path)
@@ -37,6 +36,7 @@ class LoginCase(unittest.TestCase):
         r = requests.post(sign_up_url, sign_up_pars)
         return r
 
+    @pytest.mark.bvt
     def test_sign_up_success(self):
         '''冒烟测试 注册成功'''
         mobile_phone = '18000000001'

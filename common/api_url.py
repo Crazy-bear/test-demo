@@ -1,10 +1,23 @@
 # encoding:utf8
 from hashlib import md5
 import requests
+import unittest
+from sys import argv
+import os
 
-api = 'http://test-api.tianhangbox.net'  # 测试环境
+if 'Win' in os.environ['os'] and len(argv)==1 :
+    api = 'http://test-api.tianhangbox.net'  # 测试环境
+elif len(argv) >= 2:
+    api = argv[-1]
+    print("-----api-----:",api)
+else:
+    pass
+
+
+# api = 'http://test-api.tianhangbox.net'  # 测试环境
 
 login_url = api + '/login/appNewLogin'  # 登陆
+# print(login_url)
 sign_up_url = api + '/register/appRegisterSave'  # 注册接口URL
 
 code_url = api + '/common/sendCode'  # 通用验证码接口URL
@@ -51,7 +64,6 @@ def md5_encryption(string_):
         raise TypeError('必须传入字符串类型')
 
 
-
 def login(mobile_phone, login_psw):
     '''
 
@@ -74,11 +86,10 @@ def login(mobile_phone, login_psw):
         # assert int(id) > 0
     except AssertionError:
         raise AssertionError('登陆失败')
+    print('账号：', mobile_phone, '登陆成功')
     return r.json()['data']['token']
 
 
-
-# 运用main（）方法运行用例
 if __name__ == '__main__':
-    login('18000000001', '123456')
+    login('13286993500', '123456')
     print(md5_encryption('123456'))
