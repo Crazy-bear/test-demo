@@ -8,7 +8,7 @@ from common.mysql_database import MySqlDatabase
 from common.api_url import *
 
 
-class LoginCase(unittest.TestCase):
+class SignCase(unittest.TestCase):
 
     def setUp(self):
         self.db = MySqlDatabase()
@@ -17,6 +17,7 @@ class LoginCase(unittest.TestCase):
         self.db.connect.close()
 
     def delect_member(self, db, mobile_phone):
+        print('mobile_phone:',type(mobile_phone))
         sql = 'DELETE from member where mobile_phone=%s' % (mobile_phone)
         return db.delete(sql)
 
@@ -36,9 +37,8 @@ class LoginCase(unittest.TestCase):
         r = requests.post(sign_up_url, sign_up_pars)
         return r
 
-    @pytest.mark.bvt
     def test_sign_up_success(self):
-        '''冒烟测试 注册成功'''
+        '''冒烟测试 注册'''
         mobile_phone = '18000000001'
         login_passwd = '123456'
         login_passwd_md5 = md5_encryption(login_passwd)

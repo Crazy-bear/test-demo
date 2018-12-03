@@ -9,8 +9,8 @@ member_path = api_auto_test_path + '/test_case/'
 sys.path.insert(0, api_auto_test_path)
 sys.path.insert(0, member_path)
 
-from test_case.member.test_login import LoginCase
+from test_case.member.test_sign_up import SignCase
 
-cases = unittest.defaultTestLoader.loadTestsFromTestCase(LoginCase)
+cases = unittest.defaultTestLoader.loadTestsFromTestCase(SignCase)
 runner = unittest.TextTestRunner(verbosity=2)
 runner.run(cases)

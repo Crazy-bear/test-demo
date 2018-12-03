@@ -9,13 +9,14 @@ if 'Win' in os.environ['os'] and len(argv)==1 :
     api = 'http://test-api.tianhangbox.net'  # 测试环境
 elif len(argv) >= 2:
     api = argv[-1]
-    print("-----api-----:",api)
+    if 'http' not in api:
+        raise ValueError('命令行最后一个参数需要完整的API地址',',例：python test_login.py http://test-api.tianhangbox.net')
+    # print("-----api-----:",api)
 else:
     pass
 
 
-# api = 'http://test-api.tianhangbox.net'  # 测试环境
-
+print('Api:',api)
 login_url = api + '/login/appNewLogin'  # 登陆
 # print(login_url)
 sign_up_url = api + '/register/appRegisterSave'  # 注册接口URL

@@ -1,6 +1,32 @@
 # encoding:utf8
 import pymysql
 from pprint import pprint
+import configparser
+import os
+from sys import argv
+
+if 'Win' in os.environ['os'] and len(argv) == 1:
+    key_word = 'test'
+elif len(argv) >= 2:
+    if 'test' in argv[-1]:
+        key_word = 'test'
+
+    elif 'yufabu' in argv[-1]:
+        key_word = 'yufabu'
+
+    else:
+        raise ValueError
+
+
+dir_database_config_ini = os.path.dirname(os.path.abspath(__file__)) + '/database_config.ini'
+f = configparser.ConfigParser()
+f.read(dir_database_config_ini)
+HOST = f.get(key_word, 'host')
+print('DB_HOST:',HOST)
+PORT = int(f.get(key_word, 'port'))
+USER = f.get(key_word, 'user')
+PASSWORD = f.get(key_word, 'password')
+DB = f.get(key_word, 'db')
 
 
 # 创建一个MySqlDatebase类
@@ -8,22 +34,16 @@ class MySqlDatabase():
 
     # 打包连接数据库的信息
     def __init__(self):
-        self.host = '47.104.109.157'
-        self.port = 3309
-        self.user = 'test_rw'
-        self.password = 'l8@4v2Oet@U47cs'
-        self.db = 'th_testdb'
-        self.charset = 'utf8'
         self.connect = self.connect_mysql()
 
     # 利用try...except...抛出异常来判断是否连接成功
     def connect_mysql(self):
         try:
-            connect = pymysql.connect(host=self.host,
-                                      port=self.port,
-                                      user=self.user,
-                                      password=self.password,
-                                      db=self.db,
+            connect = pymysql.connect(host=HOST,
+                                      port=PORT,
+                                      user=USER,
+                                      password=PASSWORD,
+                                      db=DB,
                                       charset='utf8',
                                       cursorclass=pymysql.cursors.DictCursor)
             return connect
