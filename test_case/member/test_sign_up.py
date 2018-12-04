@@ -17,12 +17,11 @@ class SignCase(unittest.TestCase):
         self.db.connect.close()
 
     def delect_member(self, db, mobile_phone):
-        print('mobile_phone:',type(mobile_phone))
-        sql = 'DELETE from member where mobile_phone=%s' % (mobile_phone)
+        sql = "DELETE from member where mobile_phone='%s'" % (mobile_phone)
         return db.delete(sql)
 
     def query_msg_code(self, db, mobile_phone):
-        sql = 'select * from verify_code where mobile=%s order BY id DESC' % (mobile_phone)
+        sql = "select * from verify_code where mobile='%s' order BY id DESC" % (mobile_phone)
         return db.query_rows(sql)
 
     def send_msg_code(self, mobile_phone):

@@ -1,6 +1,5 @@
 # encoding:utf8
 import pymysql
-from pprint import pprint
 import configparser
 import os
 from sys import argv
@@ -17,12 +16,11 @@ elif len(argv) >= 2:
     else:
         raise ValueError
 
-
 dir_database_config_ini = os.path.dirname(os.path.abspath(__file__)) + '/database_config.ini'
 f = configparser.ConfigParser()
 f.read(dir_database_config_ini)
 HOST = f.get(key_word, 'host')
-print('DB_HOST:',HOST)
+print('DB_HOST:', HOST)
 PORT = int(f.get(key_word, 'port'))
 USER = f.get(key_word, 'user')
 PASSWORD = f.get(key_word, 'password')
@@ -89,8 +87,13 @@ class MySqlDatabase():
 
 if __name__ == '__main__':
     db = MySqlDatabase()
-    sql1 = 'select * from member where mobile_phone="13286993500"'
-    sql2 = 'select * from member where mobile_phone="13286993501"'
-    l = [sql1, sql2]
-    for i in l:
-        print(db.query_rows(i))
+
+
+    def query_member_info(db, pars):
+        sql = "SELECT username , mobile_phone , loginpsw from member where member_level='%s' and credit_employee_id_ ='%s' and create_time >= 1519797350381" % (
+            pars)
+        return db.query_rows(sql, size=1)
+
+
+    pars = ('10', '0')
+    print(query_member_info(db, pars))
