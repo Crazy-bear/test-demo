@@ -6,7 +6,8 @@ from sys import argv
 import os
 
 if 'Win' in os.environ['os'] and len(argv)==1 :
-    api = 'http://test-api.tianhangbox.net'  # 测试环境
+    # api = 'http://test-api.tianhangbox.net'  # 测试环境
+    api = 'http://th-api.tianhangbox.com'  # 测试环境
 elif len(argv) >= 2:
     api = argv[-1]
     if 'http' not in api:
@@ -23,7 +24,8 @@ sign_up_url = api + '/register/appRegisterSave'  # 注册接口URL
 
 code_url = api + '/common/sendCode'  # 通用验证码接口URL
 
-search_flights_url = api + '/order/appDomeTicketSearch'  # 国内机票-查询
+search_domestic_flights_url = api + '/order/appDomeTicketSearch'  # 国内机票-查询
+
 
 invoice_save_url = api + '/invoice/save'  # PC发票管理-保存
 invoice_delete_url = api + '/invoice/delete'  # PC发票管理-删除

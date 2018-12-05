@@ -27,14 +27,12 @@ PASSWORD = f.get(key_word, 'password')
 DB = f.get(key_word, 'db')
 
 
-# 创建一个MySqlDatebase类
+#
 class MySqlDatabase():
 
-    # 打包连接数据库的信息
     def __init__(self):
         self.connect = self.connect_mysql()
 
-    # 利用try...except...抛出异常来判断是否连接成功
     def connect_mysql(self):
         try:
             connect = pymysql.connect(host=HOST,

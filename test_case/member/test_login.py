@@ -15,8 +15,7 @@ class LoginCase(unittest.TestCase):
     def setUpClass(cls):
         cls.db = MySqlDatabase()
         cls.login_psw = 'e10adc3949ba59abbe56e057f20f883e'
-        if 'yufabu' in argv[-1]:
-            cls.update_password(cls, db=cls.db, pars=cls.login_psw)
+        cls.update_password(cls, db=cls.db, pars=cls.login_psw)
 
     @classmethod
     def tearDownClass(cls):
@@ -57,7 +56,7 @@ class LoginCase(unittest.TestCase):
         member_info = self.query_member_info(self.db, pars)
         print('member_info:', member_info)
         mobile_phone = member_info['mobile_phone']
-        login_pars = {'mobilePhone': mobile_phone, 'loginPsw': 'e10adc3949ba59abbe56e057f20f883e'} #self.login_psw
+        login_pars = {'mobilePhone': mobile_phone, 'loginPsw': 'e10adc3949ba59abbe56e057f20f883e'}  # self.login_psw
         r = requests.post(login_url, login_pars)
         status_code = r.status_code
         ret = r.json()['ret']
