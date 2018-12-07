@@ -6,14 +6,14 @@ api_auto_test_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abs
 sys.path.insert(0, api_auto_test_path)
 print(sys.path)
 from common.api_url import *
-from common.mysql_database import MySqlDatabase
+from common.mysql_database import *
 
 
 class LoginCase(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.db = MySqlDatabase()
+        cls.db = db
         cls.login_psw = 'e10adc3949ba59abbe56e057f20f883e'
         cls.update_password(cls, db=cls.db, pars=cls.login_psw)
 
@@ -22,7 +22,7 @@ class LoginCase(unittest.TestCase):
         if 'yufabu' in argv[-1]:
             cls.login_psw = None
             cls.update_password(cls, db=cls.db, pars=cls.login_psw)
-        cls.db.connect.close()
+        # cls.db.connect.close()
 
     def update_password(self, db, pars):
         sql = "UPDATE member SET loginpsw='%s'" % (pars)

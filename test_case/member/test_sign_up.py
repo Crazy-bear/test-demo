@@ -4,17 +4,18 @@ import sys
 
 api_auto_test_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, api_auto_test_path)
-from common.mysql_database import MySqlDatabase
+from common.mysql_database import *
 from common.api_url import *
 
 
 class SignCase(unittest.TestCase):
 
     def setUp(self):
-        self.db = MySqlDatabase()
+        self.db = db
 
     def tearDown(self):
-        self.db.connect.close()
+        # self.db.connect.close()
+        pass
 
     def delect_member(self, db, mobile_phone):
         sql = "DELETE from member where mobile_phone='%s'" % (mobile_phone)

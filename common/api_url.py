@@ -6,8 +6,7 @@ from sys import argv
 import os
 
 if 'Win' in os.environ['os'] and len(argv)==1 :
-    # api = 'http://test-api.tianhangbox.net'  # 测试环境
-    api = 'http://th-api.tianhangbox.com'  # 测试环境
+    api = 'http://test-api.tianhangbox.net'  # 测试环境
 elif len(argv) >= 2:
     api = argv[-1]
     if 'http' not in api:

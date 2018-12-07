@@ -19,6 +19,7 @@ elif len(argv) >= 2:
 dir_database_config_ini = os.path.dirname(os.path.abspath(__file__)) + '/database_config.ini'
 f = configparser.ConfigParser()
 f.read(dir_database_config_ini)
+
 HOST = f.get(key_word, 'host')
 print('DB_HOST:', HOST)
 PORT = int(f.get(key_word, 'port'))
@@ -31,7 +32,9 @@ DB = f.get(key_word, 'db')
 class MySqlDatabase():
 
     def __init__(self):
+        print('---连接数据库---')
         self.connect = self.connect_mysql()
+        print('---已连接---')
 
     def connect_mysql(self):
         try:
@@ -82,6 +85,8 @@ class MySqlDatabase():
             print(msg)
             self.connect.rollback()
 
+
+db = MySqlDatabase()
 
 if __name__ == '__main__':
     db = MySqlDatabase()
