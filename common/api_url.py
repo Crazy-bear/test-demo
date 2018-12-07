@@ -7,6 +7,7 @@ import os
 
 if 'Win' in os.environ['os'] and len(argv)==1 :
     api = 'http://test-api.tianhangbox.net'  # 测试环境
+    # api = 'http://yufabu-api.tianhangbox.com'  # 预发布环境
 elif len(argv) >= 2:
     api = argv[-1]
     if 'http' not in api:
