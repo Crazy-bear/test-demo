@@ -88,15 +88,15 @@ class MySqlDatabase():
 
 db = MySqlDatabase()
 
-if __name__ == '__main__':
-    db = MySqlDatabase()
-
-
-    def query_member_info(db, pars):
-        sql = "SELECT username , mobile_phone , loginpsw from member where member_level='%s' and credit_employee_id_ ='%s' and create_time >= 1519797350381" % (
-            pars)
-        return db.query_rows(sql, size=1)
-
-
-    pars = ('10', '0')
-    print(query_member_info(db, pars))
+# if __name__ == '__main__':
+#     db = MySqlDatabase()
+    #
+    #
+    # def query_member_info(db, pars):
+    #     sql = "SELECT username , mobile_phone , loginpsw from member where member_level='%s' and credit_employee_id_ ='%s' and create_time >= 1519797350381" % (
+    #         pars)
+    #     return db.query_rows(sql, size=1)
+    #
+    #
+    # pars = ('10', '0')
+    # print(query_member_info(db, pars))

@@ -19,7 +19,7 @@ class OneWayCase(unittest.TestCase):
                 'orgCityCode': 'CAN',
                 'arrCityCode': 'SHA',
                 'token': token}
-        r = requests.post(search_domestic_flights_url, pars)
+        r = requests.post(URL_SEARCH_DOMESTIC_FLIGHTS, pars)
         self.airline_list(r.json())
 
     def test_search_one_way(self):

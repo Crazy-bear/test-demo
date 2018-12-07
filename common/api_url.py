@@ -11,19 +11,18 @@ elif len(argv) >= 2:
     api = argv[-1]
     if 'http' not in api:
         raise ValueError('命令行最后一个参数需要完整的API地址',',例：python test_login.py http://test-api.tianhangbox.net')
-    # print("-----api-----:",api)
 else:
     pass
 
 
 print('Api:',api)
-login_url = api + '/login/appNewLogin'  # 登陆
-# print(login_url)
-sign_up_url = api + '/register/appRegisterSave'  # 注册接口URL
+URL_LOGIN = api + '/login/appNewLogin'  # 登陆
 
-code_url = api + '/common/sendCode'  # 通用验证码接口URL
+URL_SIGN_UP = api + '/register/appRegisterSave'  # 注册接口URL
 
-search_domestic_flights_url = api + '/order/appDomeTicketSearch'  # 国内机票-查询
+URL_MSG_CODE = api + '/common/sendCode'  # 通用验证码接口URL
+
+URL_SEARCH_DOMESTIC_FLIGHTS = api + '/order/appDomeTicketSearch'  # 国内机票-查询
 
 
 invoice_save_url = api + '/invoice/save'  # PC发票管理-保存
@@ -75,7 +74,7 @@ def login(mobile_phone, login_psw):
     '''
     login_psw = md5_encryption(login_psw)
     login_pars = {'mobilePhone': mobile_phone, 'loginPsw': login_psw}
-    r = requests.post(login_url, login_pars)
+    r = requests.post(URL_LOGIN, login_pars)
     status_code = r.status_code
     ret = r.json()['ret']
     msg = r.json()['msg']

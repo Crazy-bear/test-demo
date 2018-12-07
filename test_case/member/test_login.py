@@ -6,7 +6,7 @@ api_auto_test_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abs
 sys.path.insert(0, api_auto_test_path)
 print(sys.path)
 from common.api_url import *
-from common.mysql_database import *
+from common.mysql_database import db
 
 
 class LoginCase(unittest.TestCase):
@@ -41,7 +41,7 @@ class LoginCase(unittest.TestCase):
         print('member_info:', member_info)
         mobile_phone = member_info['mobile_phone']
         login_pars = {'mobilePhone': mobile_phone, 'loginPsw': 'e10adc3949ba59abbe56e057f20f883e'}
-        r = requests.post(login_url, login_pars)
+        r = requests.post(URL_LOGIN, login_pars)
         status_code = r.status_code
         ret = r.json()['ret']
         msg = r.json()['msg']
@@ -57,7 +57,7 @@ class LoginCase(unittest.TestCase):
         print('member_info:', member_info)
         mobile_phone = member_info['mobile_phone']
         login_pars = {'mobilePhone': mobile_phone, 'loginPsw': 'e10adc3949ba59abbe56e057f20f883e'}  # self.login_psw
-        r = requests.post(login_url, login_pars)
+        r = requests.post(URL_LOGIN, login_pars)
         status_code = r.status_code
         ret = r.json()['ret']
         msg = r.json()['msg']
@@ -73,7 +73,7 @@ class LoginCase(unittest.TestCase):
         print('member_info:', member_info)
         mobile_phone = member_info['mobile_phone']
         login_pars = {'mobilePhone': mobile_phone, 'loginPsw': 'e10adc3949ba59abbe56e057f20f883e'}
-        r = requests.post(login_url, login_pars)
+        r = requests.post(URL_LOGIN, login_pars)
         status_code = r.status_code
         ret = r.json()['ret']
         msg = r.json()['msg']
@@ -89,7 +89,7 @@ class LoginCase(unittest.TestCase):
         print('member_info:', member_info)
         mobile_phone = member_info['mobile_phone']
         login_pars = {'mobilePhone': mobile_phone, 'loginPsw': 'e10adc3949ba59abbe56e057f20f883e'}
-        r = requests.post(login_url, login_pars)
+        r = requests.post(URL_LOGIN, login_pars)
         status_code = r.status_code
         print(status_code)
         ret = r.json()['ret']

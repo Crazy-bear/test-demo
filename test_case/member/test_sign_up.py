@@ -27,14 +27,14 @@ class SignCase(unittest.TestCase):
 
     def send_msg_code(self, mobile_phone):
         code_pars = {'mobilePhone': mobile_phone}
-        r = requests.post(code_url, code_pars)
+        r = requests.post(URL_MSG_CODE, code_pars)
         self.assertEqual(200, r.status_code)
 
     def sign_up(self, mobile_phone, loginPwd, code):
         sign_up_pars = {'mobilePhone': mobile_phone,
                         'loginPwd': loginPwd,
                         'code': code}
-        r = requests.post(sign_up_url, sign_up_pars)
+        r = requests.post(URL_SIGN_UP, sign_up_pars)
         return r
 
     def test_sign_up_success(self):
