@@ -38,7 +38,7 @@ class SignCase(unittest.TestCase):
         return r
 
 
-    @unittest.skipIf(api=='http://yufabu-api.tianhangbox.com' , u'预发布环境跳过')
+    @unittest.skipIf(api!='http://test-api.tianhangbox.net' , u'预发布环境跳过')
     def test_sign_up_success(self):
         '''冒烟测试 注册'''
         mobile_phone = '18000000001'
