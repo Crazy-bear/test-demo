@@ -11,8 +11,10 @@ from common.api_url import *
 
 class ProductsCase(unittest.TestCase):
 
-    # def setUp(self):
-    #     self.base_url = 'http://yufabu-opapi.tianhangbox.com'
+    def setUp(self):
+        if 'yufabu' in argv[-1]:
+            self.base_url = 'http://yufabu-opapi.tianhangbox.com'
+
 
     def search_products(self, pars):
         rs = requests.post(PRODUCTS_LIST_URL, pars)
