@@ -49,6 +49,13 @@ psg_search_url = api + 'new_beneficiary/app_list_find_beneficiary'  # 搜索常�
 psg_list_url = api + '/new_beneficiary/app_list_beneficiary'  # 获取常用乘机人接口URL
 psg_add_url = api + '/new_beneficiary/app_add_beneficiary'  # 添加乘机人接口URL
 
+PRODUCTS_LIST_URL = api + '/product/list'  # 获取后台航司产品列表
+PRODUCTS_ADD_URL = api + '/product/add_or_update'  # 新增或编辑航司产品
+PRODUCTS_DEL_URL = api + '/product/delete'  # 删除航司产品
+PRODUCTS_AIRLINE_LIST_URL = api + '/airline/list'  # 获取后台航司产品航线列表
+PRODUCTS_AIRLINE_ADD_URL = api + '/airline/add_or_update'  # 新增或编辑航司产品航线
+PRODUCTS_AIRLINE_DEL_URL = api + '/airline/delete'  # 删除航司产品航线
+
 
 def md5_encryption(string_):
     '''
