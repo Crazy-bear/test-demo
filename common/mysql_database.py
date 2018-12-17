@@ -3,9 +3,11 @@ import pymysql
 import configparser
 import os
 from sys import argv
-
+import datetime
+import time
+from dateutil.relativedelta import relativedelta
 if 'Win' in os.environ['os'] and len(argv) == 1:
-    key_word = 'test'
+    key_word = 'yufabu'
 elif len(argv) >= 2:
     if 'test' in argv[-1]:
         key_word = 'test'
@@ -88,8 +90,22 @@ class MySqlDatabase():
 
 db = MySqlDatabase()
 
-# if __name__ == '__main__':
-#     db = MySqlDatabase()
+if __name__ == '__main__':
+    db = MySqlDatabase()
+    today = datetime.date.today()
+    endday = today + relativedelta(months=6)
+    begintime = today.strftime("%Y-%m-%d %H:%M:%S")
+    endtime = endday.strftime("%Y-%m-%d %H:%M:%S")
+    todayArray = time.strptime(str(begintime), "%Y-%m-%d %H:%M:%S")
+    endayArray = time.strptime(str(endtime), "%Y-%m-%d %H:%M:%S")
+    startdate = int(time.mktime(todayArray))
+    enddate = int(time.mktime(endayArray))
+    sql = "INSERT INTO product_route ( product_name, product_id_, line_type, trip_type, org_city_code, arr_city_code, airline, cabin_code, begin_time, end_time, product_desc, create_time, remark )" \
+               "VALUES('%s','%d','%s','%s','%s','%s','%s','%s','%d','%d','%s','%d','%s')" % (
+               '测试海航Q舱', 84, 'DOMESTIC', 'SINGLE', 'SZX', '', 'SZ', 'Q', startdate, enddate,
+               '1.优先登机 2.优先选择座位3.退改签手续费优惠',  startdate, '我是备注')
+    db.query_rows(sql)
+    # db = MySqlDatabase()
     #
     #
     # def query_member_info(db, pars):
