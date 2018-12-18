@@ -94,11 +94,146 @@ class LoginCase(unittest.TestCase):
         print(status_code)
         ret = r.json()['ret']
         msg = r.json()['msg']
-        id = r.json()['data']['id']
+        # id = r.json()['data']['id']
         self.assertEqual(200, status_code)
         self.assertEqual('0', ret)
         self.assertEqual('成功', msg)
-        self.assertTrue(int(id) > 0)
+        self.assertTrue(int(r.json()['data']['id']) > 0)
+
+    def test_member_login_all_null(self):
+        '''所有参数为空'''
+        mobile_phone = ''
+        login_psw = ''
+        login_psw_md5 = md5_encryption(login_psw)
+        login_pars = {'mobilePhone': mobile_phone, 'loginPsw': login_psw_md5}
+
+        r = requests.post(URL_LOGIN, login_pars)
+        status_code = r.status_code
+        ret = r.json()['ret']
+        msg = r.json()['msg']
+        self.assertEqual(200, status_code)
+        self.assertEqual('1001', ret)
+        self.assertEqual('手机号码不能为空', msg)
+
+    def test_member_login_mobile_phone_effective(self):
+        '''账号 有效；密码 有效'''
+        mobile_phone = '13510278155'
+        login_psw = '123456'
+        login_psw_md5 = md5_encryption(login_psw)
+        login_pars = {'mobilePhone': mobile_phone, 'loginPsw': login_psw_md5}
+
+        r = requests.post(URL_LOGIN, login_pars)
+        status_code = r.status_code
+        ret = r.json()['ret']
+        msg = r.json()['msg']
+        self.assertEqual(200, status_code)
+        self.assertEqual('0', ret)
+        self.assertEqual('成功', msg)
+
+    def test_member_login_mobile_phone_effective_1(self):
+        '''账号 有效；密码 无效'''
+        mobile_phone = '13510278155'
+        login_psw = '145236'
+        login_psw_md5 = md5_encryption(login_psw)
+        login_pars = {'mobilePhone': mobile_phone, 'loginPsw': login_psw_md5}
+
+        r = requests.post(URL_LOGIN, login_pars)
+        status_code = r.status_code
+        ret = r.json()['ret']
+        msg = r.json()['msg']
+        self.assertEqual(200, status_code)
+        self.assertEqual('16164', ret)
+        self.assertEqual('密码错误', msg)
+
+    def test_member_login_mobile_phone_effective_2(self):
+        '''账号 有效；密码 空'''
+        mobile_phone = '13510278155'
+        login_psw = ''
+        login_psw_md5 = md5_encryption(login_psw)
+        login_pars = {'mobilePhone': mobile_phone, 'loginPsw': login_psw_md5}
+
+        r = requests.post(URL_LOGIN, login_pars)
+        status_code = r.status_code
+        ret = r.json()['ret']
+        msg = r.json()['msg']
+        self.assertEqual(200, status_code)
+        self.assertEqual('16164', ret)
+        self.assertEqual('密码错误', msg)
+
+    def test_member_login_mobile_phone_ineffective(self):
+        '''账号 无效；密码 有效'''
+        mobile_phone = '13510284555'
+        login_psw = '123456'
+        login_psw_md5 = md5_encryption(login_psw)
+        login_pars = {'mobilePhone': mobile_phone, 'loginPsw': login_psw_md5}
+
+        r = requests.post(URL_LOGIN, login_pars)
+        status_code = r.status_code
+        ret = r.json()['ret']
+        msg = r.json()['msg']
+        self.assertEqual(200, status_code)
+        self.assertEqual('16163', ret)
+        self.assertEqual('该账号不存在', msg)
+
+    def test_member_login_mobile_phone_ineffective_1(self):
+        '''账号 无效；密码 无效'''
+        mobile_phone = '13510284555'
+        login_psw = '￥@#中文'
+        login_psw_md5 = md5_encryption(login_psw)
+        login_pars = {'mobilePhone': mobile_phone, 'loginPsw': login_psw_md5}
+
+        r = requests.post(URL_LOGIN, login_pars)
+        status_code = r.status_code
+        ret = r.json()['ret']
+        msg = r.json()['msg']
+        self.assertEqual(200, status_code)
+        self.assertEqual('16163', ret)
+        self.assertEqual('该账号不存在', msg)
+
+    def test_member_login_mobile_phone_ineffective_2(self):
+        '''账号 无效；密码 空'''
+        mobile_phone = '13510284555'
+        login_psw = ''
+        login_psw_md5 = md5_encryption(login_psw)
+        login_pars = {'mobilePhone': mobile_phone, 'loginPsw': login_psw_md5}
+
+        r = requests.post(URL_LOGIN, login_pars)
+        status_code = r.status_code
+        ret = r.json()['ret']
+        msg = r.json()['msg']
+        self.assertEqual(200, status_code)
+        self.assertEqual('16163', ret)
+        self.assertEqual('该账号不存在', msg)
+
+    def test_member_login_mobile_phone_null(self):
+        '''账号 空；密码 有效'''
+        mobile_phone = ''
+        login_psw = '123456'
+        login_psw_md5 = md5_encryption(login_psw)
+        login_pars = {'mobilePhone': mobile_phone, 'loginPsw': login_psw_md5}
+
+        r = requests.post(URL_LOGIN, login_pars)
+        status_code = r.status_code
+        ret = r.json()['ret']
+        msg = r.json()['msg']
+        self.assertEqual(200, status_code)
+        self.assertEqual('1001', ret)
+        self.assertEqual('手机号码不能为空', msg)
+
+    def test_member_login_mobile_phone_null_1(self):
+        '''账号 空；密码 无效'''
+        mobile_phone = ''
+        login_psw = '中文123'
+        login_psw_md5 = md5_encryption(login_psw)
+        login_pars = {'mobilePhone': mobile_phone, 'loginPsw': login_psw_md5}
+
+        r = requests.post(URL_LOGIN, login_pars)
+        status_code = r.status_code
+        ret = r.json()['ret']
+        msg = r.json()['msg']
+        self.assertEqual(200, status_code)
+        self.assertEqual('1001', ret)
+        self.assertEqual('手机号码不能为空', msg)
 
 
 if __name__ == '__main__':

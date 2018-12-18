@@ -7,7 +7,7 @@ import datetime
 import time
 from dateutil.relativedelta import relativedelta
 if 'Win' in os.environ['os'] and len(argv) == 1:
-    key_word = 'yufabu'
+    key_word = 'test'
 elif len(argv) >= 2:
     if 'test' in argv[-1]:
         key_word = 'test'
