@@ -233,10 +233,8 @@ class SignCase(unittest.TestCase):
             r = self.sign_up(mobile_phone, login_passwd_md5, code)
             # print('sign',r.json())
             self.assertEqual(200, r.status_code)
-            self.assertEqual('0', r.json()['ret'])
-            self.assertEqual('成功', r.json()['msg'])
-            self.assertEqual(str(mobile_phone), r.json()['data']['mobilePhone'])
-            login(mobile_phone, login_passwd)
+            self.assertEqual('999999', r.json()['ret'])
+            self.assertEqual('手机号格式错误', r.json()['msg'])
         except AssertionError:
             raise AssertionError
         finally:
@@ -253,10 +251,8 @@ class SignCase(unittest.TestCase):
             r = self.sign_up(mobile_phone, login_passwd_md5, code)
             # print('sign',r.json())
             self.assertEqual(200, r.status_code)
-            self.assertEqual('0', r.json()['ret'])
-            self.assertEqual('成功', r.json()['msg'])
-            self.assertEqual(str(mobile_phone), r.json()['data']['mobilePhone'])
-            login(mobile_phone, login_passwd)
+            self.assertEqual('999999', r.json()['ret'])
+            self.assertEqual('手机号格式错误', r.json()['msg'])
         except AssertionError:
             raise AssertionError
         finally:
@@ -273,10 +269,8 @@ class SignCase(unittest.TestCase):
             r = self.sign_up(mobile_phone, login_passwd_md5, code)
             # print('sign',r.json())
             self.assertEqual(200, r.status_code)
-            self.assertEqual('0', r.json()['ret'])
-            self.assertEqual('成功', r.json()['msg'])
-            self.assertEqual(str(mobile_phone), r.json()['data']['mobilePhone'])
-            login(mobile_phone, login_passwd)
+            self.assertEqual('999999', r.json()['ret'])
+            self.assertEqual('手机号格式错误', r.json()['msg'])
         except AssertionError:
             raise AssertionError
         finally:
